@@ -41,7 +41,7 @@ public class JDBCDeveloperDAO implements DeveloperDAO {
                 throw new RuntimeException("Cannot find Developer with id " + id);
             }
         }catch (SQLException e) {
-            LOGGER.error("Exception occurred while connectiong to DB : ", e);
+            LOGGER.error("Exception occurred while connection to DB : ", e);
             throw new RuntimeException(e);
         }
     }
@@ -111,7 +111,7 @@ public class JDBCDeveloperDAO implements DeveloperDAO {
         try(Connection connection = dataSource.getConnection();){
            String sql = "UPDATE DEVELOPER SET " +
                    "NAME=?, AGE=?, ADDRESS=?, SALARY=?, ID_PROJECT=?" +
-                   "WHERE ID_DEVELOPER=?";
+                   "WHERE ID_DEVELOPER=?;";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, developer.getName());
             statement.setInt(2, developer.getAge());
