@@ -71,11 +71,12 @@ public class JDBCDeveloperDAO implements DeveloperDAO {
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
     public void addDeveloper(Developer developer){
-        try(Connection connection = dataSource.getConnection();) {
-            String sql = "INSERT INTO DEVELOPERS" +
-                    "(id_developer,name,age,address,salary,id_project)" +
-                    "values(?,?,?,?,?,?);";
-            PreparedStatement statement = connection.prepareStatement(sql);
+        String sql = "INSERT INTO DEVELOPERS" +
+                "(id_developer,name,age,address,salary,id_project)" +
+                "values(?,?,?,?,?,?);";
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);) {
+
             statement.setInt(1, developer.getId_developer());
             statement.setString(2, developer.getName());
             statement.setInt(3, developer.getAge());
@@ -93,9 +94,9 @@ public class JDBCDeveloperDAO implements DeveloperDAO {
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
     public void deleteDeveloper(int id_developer){
-        try(Connection connection = dataSource.getConnection();){
-            String sql = "DELETE FROM DEVELOPERS WHERE ID_DEVELOPER=?";
-            PreparedStatement statement = connection.prepareStatement(sql);
+        String sql = "DELETE FROM DEVELOPERS WHERE ID_DEVELOPER = ? ;";
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);) {
             statement.setInt(1, id_developer);
             statement.executeUpdate();
 
@@ -108,11 +109,12 @@ public class JDBCDeveloperDAO implements DeveloperDAO {
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
     public void updateDeveloper(Developer developer){
-        try(Connection connection = dataSource.getConnection();){
-           String sql = "UPDATE DEVELOPER SET " +
-                   "NAME=?, AGE=?, ADDRESS=?, SALARY=?, ID_PROJECT=?" +
-                   "WHERE ID_DEVELOPER=?;";
-            PreparedStatement statement = connection.prepareStatement(sql);
+        String sql = "UPDATE DEVELOPERS SET " +
+                "NAME= ?, AGE=?, ADDRESS=?, SALARY=?, ID_PROJECT=? " +
+                "WHERE ID_DEVELOPER =? ;";
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);){
+
             statement.setString(1, developer.getName());
             statement.setInt(2, developer.getAge());
             statement.setString(3, developer.getAddress());
