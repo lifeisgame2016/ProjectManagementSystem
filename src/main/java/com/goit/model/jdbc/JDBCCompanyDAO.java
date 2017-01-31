@@ -10,10 +10,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class JDBCCompanyDAO implements CompanyDAO {
@@ -44,24 +42,77 @@ public class JDBCCompanyDAO implements CompanyDAO {
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
     public List<Company> findAll() {
-        return null;
+        List<Company> result = new ArrayList<>();
+        try(Connection connection = dataSource.getConnection();
+        Statement statement = connection.createStatement();){
+            String sql = "SELECT * FROM COMPANIES;";
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while(resultSet.next()){
+                Company company = createCompany(resultSet);
+                result.add(company);
+            }
+        } catch (SQLException e) {
+            LOGGER.error("Exception occurred while connecting to DB : ", e);
+            throw new RuntimeException(e);
+        }
+        return result;
     }
 
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
     public void addCompany(Company company) {
+        String sql = "INSERT INTO companies " +
+                "(id_company, name, address, id_project) " +
+                "VALUES (?, ?, ?, ?);";
+        try(Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, company.getId_company());
+            statement.setString(2, company.getName());
+            statement.setString(3, company.getAddress());
+            statement.setInt(4, company.getId_project());
+            statement.executeUpdate();
 
+        } catch (SQLException e) {
+            LOGGER.error("Exception occurred while connecting to DB : ", e);
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
     public void deleteCompany(int id_company) {
+        String sql = "DELETE FROM COMPANIES WHERE ID_COMPANY = ? ;";
+        try(Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);) {
+            statement.setInt(1, id_company);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.error("Exception occurred while connecting to DB : ", e);
+            throw new RuntimeException(e);
+        }
 
     }
 
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
     public void updateCompany(Company company) {
+        String sql = "UPDATE COMPANIES SET " +
+                "NAME = ?, ADDRESS = ?, ID_PROJECT = ? " +
+                "WHERE id_company = ? ;";
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);) {
+
+            statement.setString(1, company.getName());
+            statement.setString(2, company.getAddress());
+            statement.setInt(3, company.getId_project());
+            statement.setInt(4, company.getId_company());
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            LOGGER.error("Exception occurred while connecting to DB : ", e);
+            throw new RuntimeException(e);
+        }
 
     }
 
