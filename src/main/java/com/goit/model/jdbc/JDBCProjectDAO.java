@@ -63,12 +63,12 @@ public class JDBCProjectDAO implements ProjectDAO {
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
     public void addProject(Project project) {
-        try(Connection connection = dataSource.getConnection();) {
-            String sql = "INSERT INTO PROJECTS" +
-                    "(ID_PROJECT,NAME,DAT_BEG,DAT_END,COST,ID_COMPANY,ID_CUSTOMER)" +
-                    "VALUES(?,?,?,?,?,?,?);";
+        String sql = "INSERT INTO PROJECTS" +
+                "(ID_PROJECT,NAME,DAT_BEG,DAT_END,COST,ID_COMPANY,ID_CUSTOMER)" +
+                "VALUES(?,?,?,?,?,?,?);";
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);) {
 
-            PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, project.getId_project());
             statement.setString(2, project.getName());
             statement.setDate(3, Date.valueOf(project.getDat_beg()));
@@ -86,9 +86,10 @@ public class JDBCProjectDAO implements ProjectDAO {
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
     public void deleteProject(int id_project) {
-        try(Connection connection = dataSource.getConnection();){
-            String sql = "DELETE FROM PROJECTS WHERE ID_PROJECT =?;";
-            PreparedStatement statement = connection.prepareStatement(sql);
+        String sql = "DELETE FROM PROJECTS WHERE ID_PROJECT =?;";
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);){
+
             statement.setInt(1, id_project);
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -101,12 +102,13 @@ public class JDBCProjectDAO implements ProjectDAO {
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
     public void updateProject(Project project) {
-        try(Connection connection = dataSource.getConnection();){
-            String sql = "UPDATE PROJECTS SET " +
-                    "ID_PROJECT=?, NAME=?, DAT_BEG=?, DAT_END=?" +
-                    ",ID_COMPANY=?, ID_CUSTOMER=?, COST=?" +
-                    "WHERE ID_PROJECT=?;";
-            PreparedStatement statement = connection.prepareStatement(sql);
+        String sql = "UPDATE PROJECTS SET " +
+                "ID_PROJECT=?, NAME=?, DAT_BEG=?, DAT_END=?" +
+                ",ID_COMPANY=?, ID_CUSTOMER=?, COST=?" +
+                "WHERE ID_PROJECT=?;";
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);){
+
             statement.setInt(1, project.getId_project());
             statement.setString(2, project.getName());
             statement.setDate(3, Date.valueOf(project.getDat_beg()));

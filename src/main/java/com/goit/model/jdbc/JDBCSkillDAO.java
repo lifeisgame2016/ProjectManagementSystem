@@ -62,11 +62,12 @@ public class JDBCSkillDAO implements SkillDAO {
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
     public void addSkill(Skill skill) {
-        try(Connection connection = dataSource.getConnection();){
-            String sql = "INSERT INTO SKILLS" +
-                    "(id_skills, name, id_developer)" +
-                    "values(?,?,?);";
-            PreparedStatement statement = connection.prepareStatement(sql);
+        String sql = "INSERT INTO SKILLS" +
+                "(id_skills, name, id_developer)" +
+                "values(?,?,?);";
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);){
+
             statement.setInt(1, skill.getId_skills());
             statement.setString(2, skill.getName());
             statement.setInt(3, skill.getId_developer());
@@ -82,9 +83,10 @@ public class JDBCSkillDAO implements SkillDAO {
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
     public void deleteSkill(int id_skill) {
-        try(Connection connection = dataSource.getConnection();){
-            String sql = "DELETE FROM SKILLS WHERE ID_SKILLS=?";
-            PreparedStatement statement = connection.prepareStatement(sql);
+        String sql = "DELETE FROM SKILLS WHERE ID_SKILLS=?";
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);){
+
             statement.setInt(1, id_skill);
             statement.executeUpdate();
 
@@ -98,11 +100,12 @@ public class JDBCSkillDAO implements SkillDAO {
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
     public void updateSkill(Skill skill) {
-        try(Connection connection = dataSource.getConnection();){
-            String sql = "UPDATE SKILLS SET " +
-                    "ID_SKILLS=?, NAME=?, ID_DEVELOPER=?" +
-                    "WHERE ID_SKILLS=?;";
-            PreparedStatement statement = connection.prepareStatement(sql);
+        String sql = "UPDATE SKILLS SET " +
+                "ID_SKILLS=?, NAME=?, ID_DEVELOPER=?" +
+                "WHERE ID_SKILLS=?;";
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);){
+
             statement.setInt(1, skill.getId_skills());
             statement.setString(2, skill.getName());
             statement.setInt(3, skill.getId_developer());
