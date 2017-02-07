@@ -1,9 +1,9 @@
-package com.goit.model.jdbc;
+package com.goit.domain.jdbc;
 
 
 import com.goit.model.Customer;
-import com.goit.model.CustomerDAO;
-import com.goit.model.DeveloperDAO;
+import com.goit.domain.dao.CustomerDAO;
+import com.goit.model.builder.CustomerBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Propagation;
@@ -18,11 +18,11 @@ public class JDBCCustomerDAO implements CustomerDAO {
 
     private DataSource dataSource;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DeveloperDAO.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CustomerDAO.class);
 
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
-    public Customer load(int id) {
+    public Customer find(Integer id) {
         Customer customer = null;
         try(Connection connection = dataSource.getConnection();
             PreparedStatement statement =
@@ -31,7 +31,7 @@ public class JDBCCustomerDAO implements CustomerDAO {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.next()){
-                return createCustomer(resultSet);
+                return retrieve(resultSet);
             } else {
                 throw new RuntimeException("Cannot find Developer with id " + id);
             }
@@ -52,8 +52,7 @@ public class JDBCCustomerDAO implements CustomerDAO {
             String sql = "SELECT * FROM CUSTOMERS;";
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
-                Customer customer = createCustomer(resultSet);
-                result.add(customer);
+                result.add(retrieve(resultSet));
             }
         } catch (SQLException e) {
             LOGGER.error("Exception occurred while connecting to DB : ", e);
@@ -64,34 +63,13 @@ public class JDBCCustomerDAO implements CustomerDAO {
 
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
-    public void addCustomer(Customer customer) {
-        String sql = "INSERT INTO CUSTOMERS " +
-                "(ID_CUSTOMER, NAME, ACCOUNT, ID_PROJECT) " +
-                "VALUES(?, ?, ?, ?);";
-        try(Connection connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql);) {
-
-            statement.setInt(1, customer.getId_customer());
-            statement.setString(2, customer.getName());
-            statement.setDouble(3, customer.getAccount());
-            statement.setInt(4, customer.getId_project());
-            statement.executeUpdate();
-
-        } catch (SQLException e) {
-            LOGGER.error("Exception occurred while connecting to DB : ", e);
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    @Override
-    @Transactional(propagation = Propagation.MANDATORY)
-    public void deleteCustomer(int id_customer) {
+    @SuppressWarnings("all")
+    public void delete(Integer customerId) {
         String sql = "DELETE FROM CUSTOMERS WHERE ID_CUSTOMER = ?;";
         try(Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);) {
 
-            statement.setInt(1, id_customer);
+            statement.setInt(1, customerId);
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -103,32 +81,46 @@ public class JDBCCustomerDAO implements CustomerDAO {
 
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
-    public void updateCustomer(Customer customer) {
-        String sql = "UPDATE CUSTOMERS SET " +
-                "NAME = ?, ACCOUNT = ?, ID_PROJECT = ? " +
-                "WHERE ID_CUSTOMER = ?;";
+    public void save(Customer customer) {
+        String sql;
+        if(customer.getId() == null){
+            sql = "INSERT INTO CUSTOMERS " +
+                    "(NAME, ACCOUNT, ID_PROJECT) " +
+                    "VALUES(?, ?, ?);";
+        } else {
+            sql = "UPDATE CUSTOMERS SET " +
+                    "NAME = ?, ACCOUNT = ?, ID_PROJECT = ? " +
+                    "WHERE ID_CUSTOMER = ?;";
+        }
+
         try(Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);) {
 
             statement.setString(1, customer.getName());
             statement.setDouble(2, customer.getAccount());
-            statement.setInt(3, customer.getId_project());
-            statement.setInt(4, customer. getId_customer());
+            statement.setInt(3, customer.getProjectId());
+            if(customer.getId() != null){
+                statement.setInt(4, customer.getId());
+            }
             statement.executeUpdate();
 
         } catch (SQLException e) {
             LOGGER.error("Exception occurred while connecting to DB : ", e);
             throw new RuntimeException(e);
         }
-
     }
 
-    private Customer createCustomer(ResultSet resultSet) throws SQLException{
-        Customer customer = new Customer();
-        customer.setId_customer(resultSet.getInt("ID_CUSTOMER"));
-        customer.setName(resultSet.getString("NAME"));
-        customer.setAccount(resultSet.getInt("ACCOUNT"));
-        customer.setId_project(resultSet.getInt("ID_PROJECT"));
-        return customer;
+
+    private Customer retrieve(ResultSet resultSet) throws SQLException{
+        return CustomerBuilder.aCustomer()
+                .withId(resultSet.getInt("ID_CUSTOMER"))
+                .withName(resultSet.getString("NAME"))
+                .withAccount(resultSet.getDouble("ACCOUNT"))
+                .withProjectId(resultSet.getInt("ID_PROJECT"))
+                .build();
+    }
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 }
