@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.goit"/>
+    <context:spring-configured/>
+
+    <!--<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true"/>-->
+
+    <bean id="developerDAO" class="com.goit.domain.jdbc.JDBCDeveloperDAO">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="skillDAO" class="com.goit.domain.jdbc.JDBCSkillDAO">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="projectDAO" class="com.goit.domain.jdbc.JDBCProjectDAO">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="customerDAO" class="com.goit.domain.jdbc.JDBCCustomerDAO">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="companyDAO" class="com.goit.domain.jdbc.JDBCCompanyDAO">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource">
+        <property name="driverClass" value="${jdbc.driver.class}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="minPoolSize" value="${jdbc.min.connections}"/>
+        <property name="maxPoolSize" value="${jdbc.max.connections}"/>
+        <property name="acquireIncrement" value="${jdbc.acquire.increment}"/>
+    </bean>
+
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:jdbc.properties"/>
+    </bean>
+
+    <bean id="developerService" class="com.goit.service.DeveloperServiceImpl">
+        <property name="developerDAO" ref="developerDAO"/>
+        <property name="skillDAO" ref="skillDAO"/>
+    </bean>
+
+    <!--<bean id="skillService" class="com.goit.service.SkillServiceImpl">
+        <property name="skillDAO" ref="skillDAO"/>
+    </bean>-->
+
+    <!--<tx:annotation-driven proxy-target-class="true"-->
+    <!--transaction-manager="txManager" />-->
+
+</beans>

@@ -1,7 +1,7 @@
 package com.goit.controllers;
 
-import com.goit.model.Developer;
-import com.goit.service.DeveloperService;
+import com.goit.model.Skill;
+import com.goit.service.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,59 +16,59 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @Controller
-@RequestMapping("/developers")
+@RequestMapping("/skills")
 @Transactional
-public class DeveloperController {
+public class SkillController {
 
     @Autowired
     private PlatformTransactionManager txManager;
+
     @Autowired
-    private DeveloperService developerService;
+    private SkillService skillService;
+
+    @RequestMapping(value = "/{id}", produces = "application/json")
+    @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @SuppressWarnings("all")
+    public Skill getSkillById(@PathVariable Integer id){
+        try{
+            TransactionStatus status =
+                    txManager.getTransaction(new DefaultTransactionDefinition(TransactionDefinition.PROPAGATION_REQUIRED));
+            Skill skill = skillService.get(id);
+            txManager.commit(status);
+            return skill;
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
 
     @RequestMapping(produces = "application/json")
     @ResponseBody
-    public ResponseEntity<List<Developer>> getAllDeveloper() {
+    public ResponseEntity<List<Skill>> getAllSkill(){
         TransactionStatus status =
                 txManager.getTransaction(new DefaultTransactionDefinition
                         (TransactionDefinition.PROPAGATION_REQUIRED));
         try {
-            List<Developer> result = developerService.all();
+            List<Skill> result = skillService.all();
             txManager.commit(status);
-            return new ResponseEntity<List<Developer>>(result, HttpStatus.OK);
+            return new ResponseEntity<List<Skill>>(result, HttpStatus.OK);
         } catch (Exception e) {
             txManager.rollback(status);
             throw new RuntimeException(e);
         }
     }
 
-    @RequestMapping(value = "/{id}", produces = "application/json")
-    @ResponseBody
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public Developer getDeveloperById(@PathVariable Integer id) {
-        try {
-            TransactionStatus status =
-                    txManager.getTransaction(new DefaultTransactionDefinition(TransactionDefinition.PROPAGATION_REQUIRED));
-            Developer developer = developerService.get(id);
-            txManager.commit(status);
-            return developer;
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
-    }
-
-    //method post - for creation, method put - for updating
     @Transactional(propagation = Propagation.REQUIRED)
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
     @SuppressWarnings("all")
-    public ResponseEntity saveDeveloper(@RequestBody Developer developer) {
+    public ResponseEntity saveSkill(@RequestBody Skill skill) {
         try {
             TransactionStatus status =
                     txManager.getTransaction(
                             new DefaultTransactionDefinition(
                                     TransactionDefinition.PROPAGATION_REQUIRED));
-            developerService.save(developer);
+            skillService.save(skill);
             return new ResponseEntity(HttpStatus.OK);
         }catch (Exception ex) {
             throw new RuntimeException(ex);
@@ -79,16 +79,14 @@ public class DeveloperController {
     //method delete
     @RequestMapping(value ="/{id}", method = RequestMethod.DELETE)
     @Transactional(propagation = Propagation.REQUIRED)
-    public void deleteDeveloperById(@PathVariable int id) {
+    public void deleteSkillById(@PathVariable int id) {
         try {
             TransactionStatus status =
                     txManager.getTransaction(new DefaultTransactionDefinition(TransactionDefinition.PROPAGATION_REQUIRED));
-            developerService.delete(id);
+            skillService.delete(id);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
 
     }
-
-
 }

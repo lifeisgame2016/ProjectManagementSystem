@@ -1,7 +1,7 @@
 package com.goit.controllers;
 
-import com.goit.model.Developer;
-import com.goit.service.DeveloperService;
+import com.goit.model.Project;
+import com.goit.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,59 +16,58 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @Controller
-@RequestMapping("/developers")
+@RequestMapping("/projects")
 @Transactional
-public class DeveloperController {
+public class ProjectController {
 
     @Autowired
     private PlatformTransactionManager txManager;
     @Autowired
-    private DeveloperService developerService;
+    private ProjectService projectService;
+
+    @RequestMapping(value = "/{id}", produces = "application/json")
+    @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @SuppressWarnings("all")
+    public Project getProjectById(@PathVariable Integer id){
+        try{
+            TransactionStatus status =
+                    txManager.getTransaction(new DefaultTransactionDefinition(TransactionDefinition.PROPAGATION_REQUIRED));
+            Project project = projectService.get(id);
+            txManager.commit(status);
+            return project;
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
 
     @RequestMapping(produces = "application/json")
     @ResponseBody
-    public ResponseEntity<List<Developer>> getAllDeveloper() {
+    public ResponseEntity<List<Project>> getAllProject() {
         TransactionStatus status =
                 txManager.getTransaction(new DefaultTransactionDefinition
                         (TransactionDefinition.PROPAGATION_REQUIRED));
         try {
-            List<Developer> result = developerService.all();
+            List<Project> result = projectService.all();
             txManager.commit(status);
-            return new ResponseEntity<List<Developer>>(result, HttpStatus.OK);
+            return new ResponseEntity<List<Project>>(result, HttpStatus.OK);
         } catch (Exception e) {
             txManager.rollback(status);
             throw new RuntimeException(e);
         }
     }
 
-    @RequestMapping(value = "/{id}", produces = "application/json")
-    @ResponseBody
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public Developer getDeveloperById(@PathVariable Integer id) {
-        try {
-            TransactionStatus status =
-                    txManager.getTransaction(new DefaultTransactionDefinition(TransactionDefinition.PROPAGATION_REQUIRED));
-            Developer developer = developerService.get(id);
-            txManager.commit(status);
-            return developer;
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
-    }
-
-    //method post - for creation, method put - for updating
     @Transactional(propagation = Propagation.REQUIRED)
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
     @SuppressWarnings("all")
-    public ResponseEntity saveDeveloper(@RequestBody Developer developer) {
+    public ResponseEntity saveProject(@RequestBody Project project) {
         try {
             TransactionStatus status =
                     txManager.getTransaction(
                             new DefaultTransactionDefinition(
                                     TransactionDefinition.PROPAGATION_REQUIRED));
-            developerService.save(developer);
+            projectService.save(project);
             return new ResponseEntity(HttpStatus.OK);
         }catch (Exception ex) {
             throw new RuntimeException(ex);
@@ -76,19 +75,17 @@ public class DeveloperController {
 
     }
 
-    //method delete
     @RequestMapping(value ="/{id}", method = RequestMethod.DELETE)
     @Transactional(propagation = Propagation.REQUIRED)
-    public void deleteDeveloperById(@PathVariable int id) {
+    public void deleteProjectById(@PathVariable int id) {
         try {
             TransactionStatus status =
                     txManager.getTransaction(new DefaultTransactionDefinition(TransactionDefinition.PROPAGATION_REQUIRED));
-            developerService.delete(id);
+            projectService.delete(id);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
 
     }
-
 
 }

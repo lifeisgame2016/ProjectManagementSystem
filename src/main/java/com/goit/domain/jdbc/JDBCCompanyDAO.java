@@ -1,8 +1,8 @@
 package com.goit.domain.jdbc;
 
 
-import com.goit.model.Company;
 import com.goit.domain.dao.CompanyDAO;
+import com.goit.model.Company;
 import com.goit.model.builder.CompanyBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -15,4 +15,5 @@ public interface DeveloperDAO {
 
     void save(Developer developer);
 
+    List<Developer> findByName(String name);
 }

@@ -109,6 +109,28 @@ public class JDBCDeveloperDAO implements DeveloperDAO {
         }
     }
 
+    @Override
+    @Transactional
+    public List<Developer> findByName(String name) {
+        List<Developer> result = new ArrayList<>();
+        String sql = "SELECT * FROM DEVELOPERS WHERE NAME = ? ;";
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)){
+            statement.setString(1, name);
+            LOGGER.info("Successfully connected to DB");
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+                result.add(retrieve(resultSet));
+            }
+
+        } catch (SQLException e) {
+            LOGGER.error("Exception occurred while connecting to DB : ", e);
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
+
     private Developer retrieve(ResultSet resultSet) throws SQLException {
         return DeveloperBuilder.aDeveloper()
                 .withId(resultSet.getInt("ID_DEVELOPER"))

@@ -1,7 +1,7 @@
 package com.goit.controllers;
 
-import com.goit.model.Developer;
-import com.goit.service.DeveloperService;
+import com.goit.model.Customer;
+import com.goit.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,27 +16,26 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @Controller
-@RequestMapping("/developers")
+@RequestMapping("/customers")
 @Transactional
-public class DeveloperController {
+public class CustomerController {
 
     @Autowired
     private PlatformTransactionManager txManager;
     @Autowired
-    private DeveloperService developerService;
+    private CustomerService customerService;
 
     @RequestMapping(produces = "application/json")
     @ResponseBody
-    public ResponseEntity<List<Developer>> getAllDeveloper() {
+    public ResponseEntity<List<Customer>> getAllCustomer() {
         TransactionStatus status =
                 txManager.getTransaction(new DefaultTransactionDefinition
                         (TransactionDefinition.PROPAGATION_REQUIRED));
         try {
-            List<Developer> result = developerService.all();
+            List<Customer> result = customerService.all();
             txManager.commit(status);
-            return new ResponseEntity<List<Developer>>(result, HttpStatus.OK);
+            return new ResponseEntity<List<Customer>>(result, HttpStatus.OK);
         } catch (Exception e) {
             txManager.rollback(status);
             throw new RuntimeException(e);
@@ -46,13 +45,13 @@ public class DeveloperController {
     @RequestMapping(value = "/{id}", produces = "application/json")
     @ResponseBody
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public Developer getDeveloperById(@PathVariable Integer id) {
+    public Customer getCustomerById(@PathVariable Integer id) {
         try {
             TransactionStatus status =
                     txManager.getTransaction(new DefaultTransactionDefinition(TransactionDefinition.PROPAGATION_REQUIRED));
-            Developer developer = developerService.get(id);
+            Customer customer = customerService.get(id);
             txManager.commit(status);
-            return developer;
+            return customer;
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
@@ -62,13 +61,13 @@ public class DeveloperController {
     @Transactional(propagation = Propagation.REQUIRED)
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
     @SuppressWarnings("all")
-    public ResponseEntity saveDeveloper(@RequestBody Developer developer) {
+    public ResponseEntity saveCustomer(@RequestBody Customer customer) {
         try {
             TransactionStatus status =
                     txManager.getTransaction(
                             new DefaultTransactionDefinition(
                                     TransactionDefinition.PROPAGATION_REQUIRED));
-            developerService.save(developer);
+            customerService.save(customer);
             return new ResponseEntity(HttpStatus.OK);
         }catch (Exception ex) {
             throw new RuntimeException(ex);
@@ -79,16 +78,14 @@ public class DeveloperController {
     //method delete
     @RequestMapping(value ="/{id}", method = RequestMethod.DELETE)
     @Transactional(propagation = Propagation.REQUIRED)
-    public void deleteDeveloperById(@PathVariable int id) {
+    public void deleteCustomerById(@PathVariable int id) {
         try {
             TransactionStatus status =
                     txManager.getTransaction(new DefaultTransactionDefinition(TransactionDefinition.PROPAGATION_REQUIRED));
-            developerService.delete(id);
+            customerService.delete(id);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
 
     }
-
-
 }
