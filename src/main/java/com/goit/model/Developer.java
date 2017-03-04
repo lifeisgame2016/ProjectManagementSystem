@@ -1,34 +1,21 @@
 package com.goit.model;
 
-/**
- * Created by Den on 14-Dec-16.
- */
+
 public class Developer {
 
-    private int id_developer;
+    private Integer id;
     private String name;
-    private int age;
+    private Integer age;
     private String address;
-    private int salary;
-    private int id_project;
+    private Integer salary;
+    private Integer projectId;
 
-    public Developer(){}
-
-    public Developer(int id_developer, String name, int age, String address, int salary, int id_project) {
-        this.id_developer = id_developer;
-        this.name = name;
-        this.age = age;
-        this.address = address;
-        this.salary = salary;
-        this.id_project = id_project;
+    public Integer getId() {
+        return id;
     }
 
-    public int getId_developer() {
-        return id_developer;
-    }
-
-    public void setId_developer(int id_developer) {
-        this.id_developer = id_developer;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -39,11 +26,11 @@ public class Developer {
         this.name = name;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -55,31 +42,31 @@ public class Developer {
         this.address = address;
     }
 
-    public int getSalary() {
+    public Integer getSalary() {
         return salary;
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(Integer salary) {
         this.salary = salary;
     }
 
-    public int getId_project() {
-        return id_project;
+    public Integer getProjectId() {
+        return projectId;
     }
 
-    public void setId_project(int id_project) {
-        this.id_project = id_project;
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
     }
 
     @Override
     public String toString() {
         return "Developer{" +
-                "id_developer=" + id_developer +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", address='" + address + '\'' +
                 ", salary=" + salary +
-                ", id_project=" + id_project +
+                ", projectId=" + projectId +
                 '}';
     }
 }

@@ -5,20 +5,20 @@ import java.time.LocalDate;
 
 public class Project {
 
-    private int id_project;
+    private Integer id;
     private String name;
-    private LocalDate dat_beg;
-    private LocalDate dat_end;
-    private int cost;
-    private int id_company;
-    private int id_customer;
+    private LocalDate datBeg;
+    private LocalDate datEnd;
+    private Integer cost;
+    private Integer companyId;
+    private Integer customerId;
 
-    public int getId_project() {
-        return id_project;
+    public Integer getId() {
+        return id;
     }
 
-    public void setId_project(int id_project) {
-        this.id_project = id_project;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -29,44 +29,43 @@ public class Project {
         this.name = name;
     }
 
-    public LocalDate getDat_beg() {
-        return dat_beg;
+    public LocalDate getDatBeg() {
+        return datBeg;
     }
 
-    public void setDat_beg(LocalDate dat_beg) {
-        this.dat_beg = dat_beg;
+    public void setDatBeg(LocalDate datBeg) {
+        this.datBeg = datBeg;
     }
 
-    public LocalDate getDat_end() {
-        return dat_end;
+    public LocalDate getDatEnd() {
+        return datEnd;
     }
 
-    public void setDat_end(LocalDate dat_end) {
-        this.dat_end = dat_end;
+    public void setDatEnd(LocalDate datEnd) {
+        this.datEnd = datEnd;
     }
 
-    public int getCost() {
+    public Integer getCost() {
         return cost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(Integer cost) {
         this.cost = cost;
     }
 
-    public int getId_company() {
-        return id_company;
+    public Integer getCompanyId() {
+        return companyId;
     }
 
-    public void setId_company(int id_company) {
-        this.id_company = id_company;
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
     }
 
-    public int getId_customer() {
-        return id_customer;
+    public Integer getCustomerId() {
+        return customerId;
     }
 
-    public void setId_customer(int id_customer) {
-        this.id_customer = id_customer;
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
-
 }

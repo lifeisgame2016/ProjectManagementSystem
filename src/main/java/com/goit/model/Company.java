@@ -1,19 +1,21 @@
 package com.goit.model;
 
-
+/*
+* Simple POJO
+* */
 public class Company {
 
-    private int id_company;
+    private Integer id;
     private String name;
     private String address;
-    private int id_project;
+    private Integer projectId;
 
-    public int getId_company() {
-        return id_company;
+    public Integer getId() {
+        return id;
     }
 
-    public void setId_company(int id_company) {
-        this.id_company = id_company;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -32,11 +34,11 @@ public class Company {
         this.address = address;
     }
 
-    public int getId_project() {
-        return id_project;
+    public Integer getProjectId() {
+        return projectId;
     }
 
-    public void setId_project(int id_project) {
-        this.id_project = id_project;
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
     }
 }

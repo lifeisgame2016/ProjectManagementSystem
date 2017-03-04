@@ -3,17 +3,17 @@ package com.goit.model;
 
 public class Customer {
 
-    private int id_customer;
+    private Integer id;
     private String name;
-    private double account;
-    private int id_project;
+    private Double account;
+    private Integer projectId;
 
-    public int getId_customer() {
-        return id_customer;
+    public Integer getId() {
+        return id;
     }
 
-    public void setId_customer(int id_customer) {
-        this.id_customer = id_customer;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -24,19 +24,19 @@ public class Customer {
         this.name = name;
     }
 
-    public double getAccount() {
+    public Double getAccount() {
         return account;
     }
 
-    public void setAccount(double account) {
+    public void setAccount(Double account) {
         this.account = account;
     }
 
-    public int getId_project() {
-        return id_project;
+    public Integer getProjectId() {
+        return projectId;
     }
 
-    public void setId_project(int id_project) {
-        this.id_project = id_project;
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
     }
 }

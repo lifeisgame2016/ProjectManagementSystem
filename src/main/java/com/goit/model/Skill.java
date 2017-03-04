@@ -1,20 +1,18 @@
 package com.goit.model;
 
-/**
- * Created by Den on 15-Jan-17.
- */
+
 public class Skill {
 
-    private int id_skills;
+    private Integer id;
     private String name;
-    private int id_developer;
+    private Integer developerId;
 
-    public int getId_skills() {
-        return id_skills;
+    public Integer getId() {
+        return id;
     }
 
-    public void setId_skills(int id_skills) {
-        this.id_skills = id_skills;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -25,11 +23,11 @@ public class Skill {
         this.name = name;
     }
 
-    public int getId_developer() {
-        return id_developer;
+    public Integer getDeveloperId() {
+        return developerId;
     }
 
-    public void setId_developer(int id_developer) {
-        this.id_developer = id_developer;
+    public void setDeveloperId(Integer developerId) {
+        this.developerId = developerId;
     }
 }
