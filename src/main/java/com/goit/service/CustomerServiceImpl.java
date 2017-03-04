@@ -34,4 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> all() {
         return customerDAO.findAll();
     }
+
+    public void setCustomerDAO(com.goit.domain.jdbc.JDBCCustomerDAO customerDAO) {
+    }
 }

@@ -29,4 +29,7 @@ public class SkillServiceImpl implements SkillService {
     public List<Skill> all() {
         return skillDAO.findAll();
     }
+
+    public void setSkillDAO(com.goit.domain.jdbc.JDBCSkillDAO skillDAO) {
+    }
 }

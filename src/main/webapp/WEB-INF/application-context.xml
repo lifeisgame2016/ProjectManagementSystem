@@ -19,17 +19,21 @@
         <property name="skillDAO" ref="skillDAO"/>
     </bean>
 
-    <bean id="customerService" class="com.goit.service.CustomerServiceImpl"/>
+    <bean id="customerService" class="com.goit.service.CustomerServiceImpl">
+        <property name="customerDAO" ref="customerDAO"/>
+    </bean>
 
-    <bean id="companyService" class="com.goit.service.СompanyServiceImpl"/>
+    <bean id="companyService" class="com.goit.service.СompanyServiceImpl">
+        <property name="companyDAO" ref="companyDAO"/>
+    </bean>
 
-    <bean id="skillService" class="com.goit.service.SkillServiceImpl"/>
+    <bean id="projectService" class="com.goit.service.ProjectServiceImpl">
+        <property name="projectDAO" ref="projectDAO"/>
+    </bean>
 
-    <bean id="projectService" class="com.goit.service.ProjectServiceImpl"/>
-
-    <!--<bean id="skillService" class="com.goit.service.SkillServiceImpl">
+    <bean id="skillService" class="com.goit.service.SkillServiceImpl">
         <property name="skillDAO" ref="skillDAO"/>
-    </bean>-->
+    </bean>
 
 
 

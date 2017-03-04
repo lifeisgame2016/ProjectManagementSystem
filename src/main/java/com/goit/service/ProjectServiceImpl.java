@@ -42,4 +42,7 @@ public class ProjectServiceImpl implements ProjectService {
     public List<Project> all() {
         return projectDAO.findAll();
     }
+
+    public void setProjectDAO(com.goit.domain.jdbc.JDBCProjectDAO projectDAO) {
+    }
 }
