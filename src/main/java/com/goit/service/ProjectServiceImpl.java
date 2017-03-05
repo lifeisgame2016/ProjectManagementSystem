@@ -43,6 +43,7 @@ public class ProjectServiceImpl implements ProjectService {
         return projectDAO.findAll();
     }
 
-    public void setProjectDAO(com.goit.domain.jdbc.JDBCProjectDAO projectDAO) {
+    public void setProjectDAO(ProjectDAO projectDAO) {
+        this.projectDAO = projectDAO;
     }
 }
