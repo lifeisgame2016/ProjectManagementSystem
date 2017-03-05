@@ -35,6 +35,7 @@ public class СompanyServiceImpl implements CompanyService {
         return companyDAO.findAll();
     }
 
-    public void setCompanyDAO(com.goit.domain.jdbc.JDBCCompanyDAO companyDAO) {
+    public void setCompanyDAO(CompanyDAO companyDAO) {
+        this.companyDAO = companyDAO;
     }
 }
