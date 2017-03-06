@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<changeset autor="andre" id = "create developer table">
+    <sql><![CDATA[
+        insert into ...;
+
+        update ...;
+
+
+        create or replace
+        ]]></sql>
+    <rollback>
+        <![CDATA[
+        drop table ...;
+            ]]>
+    </rollback>
+</changeset>
