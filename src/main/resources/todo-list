@@ -1,5 +1,0 @@
-1. Controllers for all kind of entities
-2. Integration tests for dao
-3. Integration test for controllers (mockMVC)
-4. In-memory h2 database for testing
-5. Flyway/liquibase
