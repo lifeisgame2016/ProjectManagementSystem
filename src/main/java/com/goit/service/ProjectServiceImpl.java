@@ -6,7 +6,6 @@ import com.goit.model.Project;
 
 import java.util.List;
 
-
 public class ProjectServiceImpl implements ProjectService {
 
     private ProjectDAO projectDAO;

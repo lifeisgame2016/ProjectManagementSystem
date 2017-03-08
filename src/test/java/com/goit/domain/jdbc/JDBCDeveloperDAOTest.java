@@ -24,7 +24,7 @@ public class JDBCDeveloperDAOTest {
     private DataSourceTransactionManager txManager;
 
     @Test
-    public void findAllTest() throws Exception {
+    public void findAllTest() throws Exception{
         TransactionStatus transaction = txManager.getTransaction(new DefaultTransactionDefinition());
         assertFalse(developerDAO.findAll().isEmpty());
         txManager.commit(transaction);

@@ -1,6 +1,7 @@
 package com.goit.model;
 
 
+
 public class Developer {
 
     private Integer id;

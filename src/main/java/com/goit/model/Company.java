@@ -3,6 +3,7 @@ package com.goit.model;
 /*
 * Simple POJO
 * */
+
 public class Company {
 
     private Integer id;

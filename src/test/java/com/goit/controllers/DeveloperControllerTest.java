@@ -36,7 +36,7 @@ public class DeveloperControllerTest {
     private MockMvc mockMvc;
 
     @Before
-    public void start() {
+    public void start(){
         mockMvc = MockMvcBuilders.standaloneSetup(developerController).build();
     }
 

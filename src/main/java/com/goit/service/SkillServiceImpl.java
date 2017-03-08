@@ -5,7 +5,6 @@ import com.goit.model.Skill;
 
 import java.util.List;
 
-
 public class SkillServiceImpl implements SkillService {
 
     private SkillDAO skillDAO;

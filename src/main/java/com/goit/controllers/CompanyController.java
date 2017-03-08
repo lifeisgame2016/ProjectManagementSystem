@@ -27,7 +27,7 @@ public class CompanyController {
 
     @RequestMapping(produces = "application/json")
     @ResponseBody
-    public ResponseEntity<List<Company>> getAllCompanies() {
+    public ResponseEntity<List<Company>> getAllCompanies(){
         TransactionStatus status =
                 txManager.getTransaction(new DefaultTransactionDefinition
                         (TransactionDefinition.PROPAGATION_REQUIRED));

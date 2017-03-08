@@ -81,7 +81,7 @@ public class JDBCCustomerDAO implements CustomerDAO {
 
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
-    public void save(Customer customer) {
+    public void save(Customer customer){
         String sql;
         if(customer.getId() == null){
             sql = "INSERT INTO CUSTOMERS " +

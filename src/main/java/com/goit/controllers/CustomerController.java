@@ -28,7 +28,7 @@ public class CustomerController {
 
     @RequestMapping(produces = "application/json")
     @ResponseBody
-    public ResponseEntity<List<Customer>> getAllCustomer() {
+    public ResponseEntity<List<Customer>> getAllCustomer(){
         TransactionStatus status =
                 txManager.getTransaction(new DefaultTransactionDefinition
                         (TransactionDefinition.PROPAGATION_REQUIRED));

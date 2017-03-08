@@ -4,7 +4,6 @@ import com.goit.model.Customer;
 
 import java.util.List;
 
-
 public interface CustomerDAO {
 
     Customer find(Integer id);

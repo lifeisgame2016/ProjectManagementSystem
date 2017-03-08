@@ -31,7 +31,7 @@ public class SkillController {
     @ResponseBody
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     @SuppressWarnings("all")
-    public Skill getSkillById(@PathVariable Integer id){
+    public Skill getSkillById(@PathVariable Integer id) {
         try{
             TransactionStatus status =
                     txManager.getTransaction(new DefaultTransactionDefinition(TransactionDefinition.PROPAGATION_REQUIRED));

@@ -4,7 +4,6 @@ import com.goit.model.Developer;
 
 import java.util.List;
 
-
 public interface DeveloperDAO {
 
     Developer find(Integer id);

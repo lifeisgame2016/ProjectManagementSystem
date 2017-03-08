@@ -1,6 +1,7 @@
 package com.goit.model;
 
 
+
 public class Customer {
 
     private Integer id;

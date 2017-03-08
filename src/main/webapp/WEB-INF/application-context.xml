@@ -75,6 +75,7 @@
         <property name="location" value="classpath:jdbc.properties"/>
     </bean>
 
+
     <!--<tx:annotation-driven proxy-target-class="true"-->
                           <!--transaction-manager="txManager" />-->
 

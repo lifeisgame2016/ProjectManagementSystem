@@ -30,7 +30,7 @@ public class ProjectController {
     @ResponseBody
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     @SuppressWarnings("all")
-    public Project getProjectById(@PathVariable Integer id){
+    public Project getProjectById(@PathVariable Integer id) {
         try{
             TransactionStatus status =
                     txManager.getTransaction(new DefaultTransactionDefinition(TransactionDefinition.PROPAGATION_REQUIRED));

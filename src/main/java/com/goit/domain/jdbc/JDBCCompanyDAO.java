@@ -21,7 +21,7 @@ public class JDBCCompanyDAO implements CompanyDAO {
 
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
-    public Company find(Integer id) {
+    public Company find(Integer id){
         Company company = null;
         try(Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(

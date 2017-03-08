@@ -29,7 +29,7 @@ public class DeveloperController {
 
     @RequestMapping(produces = "application/json")
     @ResponseBody
-    public ResponseEntity<List<Developer>> getAllDeveloper() {
+    public ResponseEntity<List<Developer>> getAllDeveloper(){
         TransactionStatus status =
                 txManager.getTransaction(new DefaultTransactionDefinition
                         (TransactionDefinition.PROPAGATION_REQUIRED));

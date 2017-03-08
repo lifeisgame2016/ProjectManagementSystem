@@ -3,6 +3,7 @@ package com.goit.model.builder;
 import com.goit.model.Skill;
 
 
+
 public final class SkillBuilder {
     private Integer id;
     private String name;

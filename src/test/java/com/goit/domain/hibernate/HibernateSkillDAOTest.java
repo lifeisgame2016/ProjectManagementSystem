@@ -18,7 +18,7 @@ import org.springframework.util.Assert;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/test-application-context.xml")
-public class HibernateSkillDAOTest {
+public class HibernateSkillDAOTest{
 
     @Autowired
     private SkillDAO skillDAO;

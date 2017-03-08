@@ -17,7 +17,7 @@ public interface CompanyDAO {
 
     @Deprecated
         // add company to db
-    void addCompany(Company company); //TODO implement save(Company company)
+    void addCompany(Company company);//TODO implement save(Company company)
 
     @Deprecated
         // use CompanyDao#save instead

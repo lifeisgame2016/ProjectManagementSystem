@@ -22,7 +22,7 @@ public class JDBCDeveloperDAO implements DeveloperDAO {
 
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
-    public Developer find(Integer id){
+    public Developer find(Integer id) {
         Developer developer = null;
         try(Connection connection = dataSource.getConnection();
         PreparedStatement statement =

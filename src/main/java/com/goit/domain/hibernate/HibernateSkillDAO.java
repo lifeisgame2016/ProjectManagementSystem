@@ -16,7 +16,7 @@ public class HibernateSkillDAO implements SkillDAO {
 
     @Override
     public Skill find(Integer id) {
-        try(Session session = sessionFactory.openSession()) {
+        try(Session session = sessionFactory.openSession()){
             session.joinTransaction();
             return session.find(Skill.class, id);
         }

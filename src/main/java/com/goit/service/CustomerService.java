@@ -5,6 +5,7 @@ import com.goit.model.Customer;
 
 import java.util.List;
 
+
 public interface CustomerService {
 
     void delete(int id);

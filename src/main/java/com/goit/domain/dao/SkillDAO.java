@@ -4,7 +4,6 @@ import com.goit.model.Skill;
 
 import java.util.List;
 
-
 public interface SkillDAO {
 
     Skill find(Integer id);

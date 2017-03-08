@@ -1,6 +1,7 @@
 package com.goit.model;
 
 
+
 public class Skill {
 
     private Integer id;

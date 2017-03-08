@@ -5,7 +5,6 @@ import com.goit.model.Company;
 
 import java.util.List;
 
-
 public class СompanyServiceImpl implements CompanyService {
 
     private CompanyDAO companyDAO;

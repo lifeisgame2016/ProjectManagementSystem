@@ -2,9 +2,8 @@ package com.goit.model.builder;
 
 import com.goit.model.Company;
 
-/**
- * Created by Den on 04-Feb-17.
- */
+
+
 public final class CompanyBuilder {
     private Integer id;
     private String name;

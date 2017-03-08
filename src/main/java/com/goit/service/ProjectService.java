@@ -4,6 +4,7 @@ import com.goit.model.Project;
 
 import java.util.List;
 
+
 public interface ProjectService {
 
     void delete(int id);

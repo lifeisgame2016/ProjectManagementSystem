@@ -79,7 +79,7 @@ public class JDBCSkillDAO implements SkillDAO {
 
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
-    public void save(Skill skill) {
+    public void save(Skill skill){
         String sql;
         if(skill.getId() == null){
             sql = "INSERT INTO SKILLS" +

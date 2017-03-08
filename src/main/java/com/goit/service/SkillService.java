@@ -5,6 +5,7 @@ import com.goit.model.Skill;
 
 import java.util.List;
 
+
 public interface SkillService {
 
     void delete(int id);

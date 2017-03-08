@@ -22,7 +22,7 @@ public class JDBCProjectDAO implements ProjectDAO {
 
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
-    public Project find(Integer id) {
+    public Project find(Integer id){
         Project project = null;
         try(Connection connection = dataSource.getConnection();
             PreparedStatement statement =

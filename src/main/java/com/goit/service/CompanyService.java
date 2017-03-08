@@ -5,6 +5,7 @@ import com.goit.model.Company;
 
 import java.util.List;
 
+
 public interface CompanyService {
 
     void delete(int companyId);
