@@ -1,14 +1,30 @@
 package com.goit.model;
 
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "developers")
 public class Developer {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "id_developer")
     private Integer id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "age")
     private Integer age;
+
+    @Column(name = "address")
     private String address;
+
+    @Column(name = "salary")
     private Integer salary;
+
+    @Column(name = "id_project")
     private Integer projectId;
 
     public Integer getId() {
