@@ -8,15 +8,18 @@ import javax.persistence.*;
 public class Skill {
 
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "skill_id_seq", sequenceName = "skill_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "skill_id_seq")
     @Column(name = "id_skills")
     private Integer id;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "id_developer")
-    private Integer developerId;
+    @ManyToOne
+    @JoinColumn(name = "id_developer")
+    private Developer developerId;
+
 
     public Integer getId() {
         return id;
@@ -34,11 +37,11 @@ public class Skill {
         this.name = name;
     }
 
-    public Integer getDeveloperId() {
+    public Developer getDeveloperId() {
         return developerId;
     }
 
-    public void setDeveloperId(Integer developerId) {
+    public void setDeveloperId(Developer developerId) {
         this.developerId = developerId;
     }
 }

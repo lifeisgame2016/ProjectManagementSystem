@@ -1,13 +1,28 @@
 package com.goit.model;
 
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "customers")
 public class Customer {
 
+    @Id
+    @SequenceGenerator(name = "customer_id_seq", sequenceName = "customer_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_id_seq")
+    @Column(name = "id_customer")
     private Integer id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "account")
     private Double account;
+
+    @OneToMany
+    @Column(name = "id_project")
     private Integer projectId;
+
 
     public Integer getId() {
         return id;

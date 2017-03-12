@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +17,6 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/skills")
-@Transactional
 public class SkillController {
 
     @Autowired
@@ -29,7 +27,7 @@ public class SkillController {
 
     @RequestMapping(value = "/{id}", produces = "application/json")
     @ResponseBody
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional
     @SuppressWarnings("all")
     public Skill getSkillById(@PathVariable Integer id) {
         try{
@@ -45,6 +43,7 @@ public class SkillController {
 
     @RequestMapping(produces = "application/json")
     @ResponseBody
+    @Transactional
     public ResponseEntity<List<Skill>> getAllSkill(){
         TransactionStatus status =
                 txManager.getTransaction(new DefaultTransactionDefinition
@@ -59,7 +58,7 @@ public class SkillController {
         }
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
     @SuppressWarnings("all")
     public ResponseEntity saveSkill(@RequestBody Skill skill) {
@@ -78,7 +77,7 @@ public class SkillController {
 
     //method delete
     @RequestMapping(value ="/{id}", method = RequestMethod.DELETE)
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     public void deleteSkillById(@PathVariable int id) {
         try {
             TransactionStatus status =

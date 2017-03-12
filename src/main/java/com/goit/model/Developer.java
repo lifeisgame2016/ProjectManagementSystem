@@ -8,7 +8,8 @@ import javax.persistence.*;
 public class Developer {
 
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "developer_id_seq", sequenceName = "developer_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "developer_id_seq")
     @Column(name = "id_developer")
     private Integer id;
 
@@ -24,8 +25,10 @@ public class Developer {
     @Column(name = "salary")
     private Integer salary;
 
+    @OneToMany
     @Column(name = "id_project")
     private Integer projectId;
+
 
     public Integer getId() {
         return id;

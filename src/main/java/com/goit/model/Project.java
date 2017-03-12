@@ -1,17 +1,37 @@
 package com.goit.model;
 
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
-
+@Entity
+@Table(name = "projects")
 public class Project {
 
+    @Id
+    @SequenceGenerator(name = "project_id_seq", sequenceName = "project_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "project_id_seq")
+    @Column(name = "id_project")
     private Integer id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "dat_beg")
     private LocalDate datBeg;
+
+    @Column(name = "dat_end")
     private LocalDate datEnd;
+
+    @Column(name = "cost")
     private Integer cost;
+
+    @ManyToOne
+    @Column(name = "id_company")
     private Integer companyId;
+
+    @ManyToOne
+    @Column(name = "id_customer")
     private Integer customerId;
 
     public Integer getId() {

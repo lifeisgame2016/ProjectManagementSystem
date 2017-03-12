@@ -4,11 +4,27 @@ package com.goit.model;
 * Simple POJO
 * */
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "companies")
 public class Company {
 
+
+    @Id
+    @SequenceGenerator(name = "companies_id_seq", sequenceName = "companies_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "companies_id_seq")
+    @Column(name = "id_company")
     private Integer id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "address")
     private String address;
+
+    @OneToMany
+    @Column(name = "id_project")
     private Integer projectId;
 
     public Integer getId() {
