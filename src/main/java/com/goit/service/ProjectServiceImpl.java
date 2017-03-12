@@ -22,7 +22,7 @@ public class ProjectServiceImpl implements ProjectService {
 
        developerService.all()
                .stream()
-               .filter(s -> s.getProjectId().equals(projectId))
+               .filter(s -> s.getProject().getId().equals(projectId))
                .forEach(s -> developerService.delete(s.getId()));
        projectDAO.delete(projectId);
     }
@@ -42,6 +42,7 @@ public class ProjectServiceImpl implements ProjectService {
         return projectDAO.findAll();
     }
 
-    public void setProjectDAO(com.goit.domain.jdbc.JDBCProjectDAO projectDAO) {
+    public void setProjectDAO(ProjectDAO projectDAO) {
+        this.projectDAO = projectDAO;
     }
 }

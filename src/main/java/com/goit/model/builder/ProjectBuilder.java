@@ -1,9 +1,10 @@
 package com.goit.model.builder;
 
+import com.goit.model.Company;
+import com.goit.model.Customer;
 import com.goit.model.Project;
 
 import java.time.LocalDate;
-
 
 
 public final class ProjectBuilder {
@@ -12,8 +13,8 @@ public final class ProjectBuilder {
     private LocalDate datBeg;
     private LocalDate datEnd;
     private Integer cost;
-    private Integer companyId;
-    private Integer customerId;
+    private Company company;
+    private Customer customer;
 
     private ProjectBuilder() {
     }
@@ -47,13 +48,13 @@ public final class ProjectBuilder {
         return this;
     }
 
-    public ProjectBuilder withCompanyId(Integer companyId) {
-        this.companyId = companyId;
+    public ProjectBuilder withCompanyId(Company company) {
+        this.company = company;
         return this;
     }
 
-    public ProjectBuilder withCustomerId(Integer customerId) {
-        this.customerId = customerId;
+    public ProjectBuilder withCustomerId(Customer customerId) {
+        this.customer = customer;
         return this;
     }
 
@@ -64,8 +65,8 @@ public final class ProjectBuilder {
         project.setDatBeg(datBeg);
         project.setDatEnd(datEnd);
         project.setCost(cost);
-        project.setCompanyId(companyId);
-        project.setCustomerId(customerId);
+        project.setCompany(company);
+        project.setCustomer(customer);
         return project;
     }
 }

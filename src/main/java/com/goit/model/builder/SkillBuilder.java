@@ -1,5 +1,6 @@
 package com.goit.model.builder;
 
+import com.goit.model.Developer;
 import com.goit.model.Skill;
 
 
@@ -7,7 +8,7 @@ import com.goit.model.Skill;
 public final class SkillBuilder {
     private Integer id;
     private String name;
-    private Integer developerId;
+    private Developer developer;
 
     private SkillBuilder() {
     }
@@ -26,8 +27,8 @@ public final class SkillBuilder {
         return this;
     }
 
-    public SkillBuilder withDeveloperId(Integer developerId) {
-        this.developerId = developerId;
+    public SkillBuilder withDeveloperId(Developer developerId) {
+        this.developer = developer;
         return this;
     }
 
@@ -35,7 +36,7 @@ public final class SkillBuilder {
         Skill skill = new Skill();
         skill.setId(id);
         skill.setName(name);
-        skill.setDeveloperId(developerId);
+        skill.setDeveloper(developer);
         return skill;
     }
 }

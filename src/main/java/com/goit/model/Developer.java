@@ -1,7 +1,10 @@
 package com.goit.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "developers")
@@ -25,9 +28,13 @@ public class Developer {
     @Column(name = "salary")
     private Integer salary;
 
-    @OneToMany
-    @Column(name = "id_project")
-    private Integer projectId;
+    @ManyToOne
+    @JoinColumn(name = "id_project")
+    private Project project;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "developer")
+    private List<Skill> skills;
 
 
     public Integer getId() {
@@ -70,12 +77,20 @@ public class Developer {
         this.salary = salary;
     }
 
-    public Integer getProjectId() {
-        return projectId;
+    public Project getProject() {
+        return project;
     }
 
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public List<Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<Skill> skills) {
+        this.skills = skills;
     }
 
     @Override
@@ -86,7 +101,8 @@ public class Developer {
                 ", age=" + age +
                 ", address='" + address + '\'' +
                 ", salary=" + salary +
-                ", projectId=" + projectId +
+                ", project=" + project +
+                ", skills=" + skills +
                 '}';
     }
 }

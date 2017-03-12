@@ -27,12 +27,12 @@ public class Project {
     private Integer cost;
 
     @ManyToOne
-    @Column(name = "id_company")
-    private Integer companyId;
+    @JoinColumn(name = "id_company")
+    private Company company;
 
     @ManyToOne
-    @Column(name = "id_customer")
-    private Integer customerId;
+    @JoinColumn(name = "id_customer")
+    private Customer customer;
 
     public Integer getId() {
         return id;
@@ -74,19 +74,19 @@ public class Project {
         this.cost = cost;
     }
 
-    public Integer getCompanyId() {
-        return companyId;
+    public Company getCompany() {
+        return company;
     }
 
-    public void setCompanyId(Integer companyId) {
-        this.companyId = companyId;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
-    public Integer getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

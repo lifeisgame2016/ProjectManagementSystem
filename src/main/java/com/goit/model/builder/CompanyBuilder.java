@@ -1,14 +1,16 @@
 package com.goit.model.builder;
 
 import com.goit.model.Company;
+import com.goit.model.Project;
 
+import java.util.List;
 
 
 public final class CompanyBuilder {
     private Integer id;
     private String name;
     private String address;
-    private Integer projectId;
+    private List<Project> projects;
 
     private CompanyBuilder() {
     }
@@ -32,8 +34,8 @@ public final class CompanyBuilder {
         return this;
     }
 
-    public CompanyBuilder withProjectId(Integer projectId) {
-        this.projectId = projectId;
+    public CompanyBuilder withProjects(List<Project> projects) {
+        this.projects = projects;
         return this;
     }
 
@@ -42,7 +44,7 @@ public final class CompanyBuilder {
         company.setId(id);
         company.setName(name);
         company.setAddress(address);
-        company.setProjectId(projectId);
+        company.setProjects(projects);
         return company;
     }
 }

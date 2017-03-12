@@ -27,7 +27,7 @@ public class DeveloperServiceImpl implements DeveloperService {
     public void delete(int developerId) {
         customSkillDAO.findAll()
         .stream()
-        .filter(s -> s.getDeveloperId().equals(developerId))
+        .filter(s -> s.getDeveloper().equals(developerId))
         .forEach(s -> customSkillDAO.delete(s.getId()));
         //delete developer
         developerDAO.delete(developerId);

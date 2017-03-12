@@ -5,6 +5,7 @@ package com.goit.model;
 * */
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "companies")
@@ -23,9 +24,8 @@ public class Company {
     @Column(name = "address")
     private String address;
 
-    @OneToMany
-    @Column(name = "id_project")
-    private Integer projectId;
+    @OneToMany(mappedBy = "company")
+    private List<Project> projects;
 
     public Integer getId() {
         return id;
@@ -51,11 +51,11 @@ public class Company {
         this.address = address;
     }
 
-    public Integer getProjectId() {
-        return projectId;
+    public List<Project> getProjects() {
+        return projects;
     }
 
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 }

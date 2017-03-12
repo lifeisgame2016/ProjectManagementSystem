@@ -26,7 +26,7 @@ public class HibernateSkillDAO implements SkillDAO {
     @Transactional
     public List<Skill> findAll() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("select e from skills e ").list();
+        return session.createQuery("select s from SKILLS s").list();
 
     }
 

@@ -11,45 +11,46 @@
 
     <context:component-scan base-package="com.goit"/>
     <context:spring-configured/>
-
+    <import resource="hibernate-context.xml"/>
     <!--<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true"/>-->
 
-    <bean id="developerDAO" class="com.goit.domain.jdbc.JDBCDeveloperDAO">
-        <property name="dataSource" ref="dataSource"/>
+
+    <!--<bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource">-->
+        <!--<property name="driverClass" value="${jdbc.driver.class}"/>-->
+        <!--<property name="jdbcUrl" value="${jdbc.url}"/>-->
+        <!--<property name="user" value="${jdbc.user}"/>-->
+        <!--<property name="password" value="${jdbc.password}"/>-->
+        <!--<property name="minPoolSize" value="${jdbc.min.connections}"/>-->
+        <!--<property name="maxPoolSize" value="${jdbc.max.connections}"/>-->
+        <!--<property name="acquireIncrement" value="${jdbc.acquire.increment}"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
+
+    <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+        <!--<property name="location" value="classpath:jdbc.properties"/>-->
+    <!--</bean>-->
+
+    <bean id="skillDAO" class="com.goit.domain.hibernate.HibernateSkillDAO">
+        <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
 
-    <bean id="skillDAO" class="com.goit.domain.jdbc.JDBCSkillDAO">
-        <property name="dataSource" ref="dataSource"/>
+    <bean id="developerDAO" class="com.goit.domain.hibernate.HibernateDeveloperDAO">
+        <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
 
-    <bean id="projectDAO" class="com.goit.domain.jdbc.JDBCProjectDAO">
-        <property name="dataSource" ref="dataSource"/>
+    <bean id="companyDAO" class="com.goit.domain.hibernate.HibernateCompanyDAO">
+        <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
 
-    <bean id="customerDAO" class="com.goit.domain.jdbc.JDBCCustomerDAO">
-        <property name="dataSource" ref="dataSource"/>
+    <bean id="customerDAO" class="com.goit.domain.hibernate.HibernateCustomerDAO">
+        <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
 
-    <bean id="companyDAO" class="com.goit.domain.jdbc.JDBCCompanyDAO">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-
-    <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource">
-        <property name="driverClass" value="${jdbc.driver.class}"/>
-        <property name="jdbcUrl" value="${jdbc.url}"/>
-        <property name="user" value="${jdbc.user}"/>
-        <property name="password" value="${jdbc.password}"/>
-        <property name="minPoolSize" value="${jdbc.min.connections}"/>
-        <property name="maxPoolSize" value="${jdbc.max.connections}"/>
-        <property name="acquireIncrement" value="${jdbc.acquire.increment}"/>
-    </bean>
-
-    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:jdbc.properties"/>
+    <bean id="projectDAO" class="com.goit.domain.hibernate.HibernateProjectDAO">
+        <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
 
     <bean id="developerService" class="com.goit.service.DeveloperServiceImpl">

@@ -1,7 +1,10 @@
 package com.goit.model.builder;
 
 import com.goit.model.Developer;
+import com.goit.model.Project;
+import com.goit.model.Skill;
 
+import java.util.List;
 
 
 public final class DeveloperBuilder {
@@ -10,7 +13,8 @@ public final class DeveloperBuilder {
     private Integer age;
     private String address;
     private Integer salary;
-    private Integer projectId;
+    private Project project;
+    private List<Skill> skills;
 
     private DeveloperBuilder() {
     }
@@ -44,8 +48,13 @@ public final class DeveloperBuilder {
         return this;
     }
 
-    public DeveloperBuilder withProjectId(Integer projectId) {
-        this.projectId = projectId;
+    public DeveloperBuilder withProject(Project project) {
+        this.project = project;
+        return this;
+    }
+
+    public DeveloperBuilder withSkills(List<Skill> skills){
+        this.skills = skills;
         return this;
     }
 
@@ -56,7 +65,8 @@ public final class DeveloperBuilder {
         developer.setAge(age);
         developer.setAddress(address);
         developer.setSalary(salary);
-        developer.setProjectId(projectId);
+        developer.setProject(project);
+        developer.setSkills(skills);
         return developer;
     }
 }

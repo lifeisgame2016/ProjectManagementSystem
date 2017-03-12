@@ -1,9 +1,11 @@
 package com.goit.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "SKILLS")
 @Table(name = "skills")
 public class Skill {
 
@@ -16,9 +18,10 @@ public class Skill {
     @Column(name = "name")
     private String name;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "id_developer")
-    private Developer developerId;
+    private Developer developer;
 
 
     public Integer getId() {
@@ -37,11 +40,11 @@ public class Skill {
         this.name = name;
     }
 
-    public Developer getDeveloperId() {
-        return developerId;
+    public Developer getDeveloper() {
+        return developer;
     }
 
-    public void setDeveloperId(Developer developerId) {
-        this.developerId = developerId;
+    public void setDeveloper(Developer developer) {
+        this.developer = developer;
     }
 }

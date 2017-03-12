@@ -2,6 +2,7 @@ package com.goit.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "customers")
@@ -19,9 +20,8 @@ public class Customer {
     @Column(name = "account")
     private Double account;
 
-    @OneToMany
-    @Column(name = "id_project")
-    private Integer projectId;
+    @OneToMany(mappedBy = "customer")
+    private List<Project> project;
 
 
     public Integer getId() {
@@ -48,11 +48,11 @@ public class Customer {
         this.account = account;
     }
 
-    public Integer getProjectId() {
-        return projectId;
+    public List<Project> getProject() {
+        return project;
     }
 
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
+    public void setProject(List<Project> project) {
+        this.project = project;
     }
 }
