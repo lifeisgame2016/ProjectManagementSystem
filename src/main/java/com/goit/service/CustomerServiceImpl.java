@@ -16,7 +16,7 @@ public class CustomerServiceImpl implements CustomerService {
     public void delete(int customerId) {
         projectService.all()
                 .stream()
-                .filter(s -> s.getCustomerId().equals(customerId))
+                .filter(s -> s.getCustomer().equals(customerId))
                 .forEach(s -> projectService.delete(s.getId()));
         customerDAO.delete(customerId);
     }

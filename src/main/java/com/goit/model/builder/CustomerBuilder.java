@@ -1,14 +1,16 @@
 package com.goit.model.builder;
 
 import com.goit.model.Customer;
+import com.goit.model.Project;
 
+import java.util.List;
 
 
 public final class CustomerBuilder {
     private Integer id;
     private String name;
     private Double account;
-    private Integer projectId;
+    private List<Project> projects;
 
     private CustomerBuilder() {
     }
@@ -33,8 +35,8 @@ public final class CustomerBuilder {
         return this;
     }
 
-    public CustomerBuilder withProjectId(Integer projectId) {
-        this.projectId = projectId;
+    public CustomerBuilder withProjects(List<Project> projects) {
+        this.projects = projects;
         return this;
     }
 
@@ -43,7 +45,7 @@ public final class CustomerBuilder {
         customer.setId(id);
         customer.setName(name);
         customer.setAccount(account);
-        customer.setProjectId(projectId);
+        customer.setProject(projects);
         return customer;
     }
 }

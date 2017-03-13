@@ -14,7 +14,7 @@ public class СompanyServiceImpl implements CompanyService {
     public void delete(int companyId) {
         projectService.all()
                 .stream()
-                .filter(s -> s.getCompanyId().equals(companyId))
+                .filter(s -> s.getCompany().equals(companyId))
                 .forEach(s -> projectService.delete(companyId));
         companyDAO.delete(companyId);
     }

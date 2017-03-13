@@ -23,7 +23,7 @@ public class HibernateSkillDAOTest{
     @Autowired
     private SkillDAO skillDAO;
 
-    @Autowired
+    //@Autowired
     private DataSourceTransactionManager txManager;
 
     @Test
