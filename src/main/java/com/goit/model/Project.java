@@ -3,6 +3,7 @@ package com.goit.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import utils.json.CustomLocalDateSerializer;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,11 +22,11 @@ public class Project implements Serializable{
     @Column(name = "name")
     private String name;
 
-    @JsonSerialize(using = utils.json.CustomLocalDateTimeSerializer.class)
+    @JsonSerialize(using = CustomLocalDateSerializer.class)
     @Column(name = "dat_beg")
     private LocalDate datBeg;
 
-    @JsonSerialize(using = utils.json.CustomLocalDateTimeSerializer.class)
+    @JsonSerialize(using = CustomLocalDateSerializer.class)
     @Column(name = "dat_end")
     private LocalDate datEnd;
 
