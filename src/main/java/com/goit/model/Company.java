@@ -5,11 +5,12 @@ package com.goit.model;
 * */
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "companies")
-public class Company {
+public class Company implements Serializable {
 
 
     @Id
@@ -59,3 +60,4 @@ public class Company {
         this.projects = projects;
     }
 }
+

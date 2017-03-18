@@ -15,6 +15,27 @@
 
     <!--<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true"/>-->
 
+
+    <bean id="skillDAO" class="com.goit.domain.hibernate.HibernateSkillDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="developerDAO" class="com.goit.domain.hibernate.HibernateDeveloperDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="companyDAO" class="com.goit.domain.hibernate.HibernateCompanyDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="customerDAO" class="com.goit.domain.hibernate.HibernateCustomerDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="projectDAO" class="com.goit.domain.hibernate.HibernateProjectDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
     <bean id="developerService" class="com.goit.service.DeveloperServiceImpl">
         <property name="developerDAO" ref="developerDAO"/>
         <property name="skillDAO" ref="skillDAO"/>
@@ -36,28 +57,6 @@
         <property name="skillDAO" ref="skillDAO"/>
     </bean>
 
-
-
-    <bean id="developerDAO" class="com.goit.domain.jdbc.JDBCDeveloperDAO">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-
-    <bean id="skillDAO" class="com.goit.domain.jdbc.JDBCSkillDAO">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-
-    <bean id="projectDAO" class="com.goit.domain.jdbc.JDBCProjectDAO">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-
-    <bean id="customerDAO" class="com.goit.domain.jdbc.JDBCCustomerDAO">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-
-    <bean id="companyDAO" class="com.goit.domain.jdbc.JDBCCompanyDAO">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-
     <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource">
         <property name="driverClass" value="${jdbc.driver.class}"/>
         <property name="jdbcUrl" value="${jdbc.url}"/>
@@ -68,12 +67,21 @@
         <property name="acquireIncrement" value="${jdbc.acquire.increment}"/>
     </bean>
 
-    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location" value="classpath:jdbc.properties"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="com.goit.model"/>
+        <property name="hibernateProperties">
+            <value>hibernate.dialect=org.hibernate.dialect.PostgreSQL95Dialect</value>
+        </property>
+    </bean>
+
+    <bean id="txManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
 

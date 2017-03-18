@@ -34,23 +34,23 @@
     <!--</bean>-->
 
     <bean id="skillDAO" class="com.goit.domain.hibernate.HibernateSkillDAO">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
     <bean id="developerDAO" class="com.goit.domain.hibernate.HibernateDeveloperDAO">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
     <bean id="companyDAO" class="com.goit.domain.hibernate.HibernateCompanyDAO">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
     <bean id="customerDAO" class="com.goit.domain.hibernate.HibernateCustomerDAO">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
     <bean id="projectDAO" class="com.goit.domain.hibernate.HibernateProjectDAO">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
     <bean id="developerService" class="com.goit.service.DeveloperServiceImpl">

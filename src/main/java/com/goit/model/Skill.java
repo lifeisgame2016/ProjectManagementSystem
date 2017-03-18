@@ -4,10 +4,12 @@ package com.goit.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.io.Serializable;
+
 
 @Entity(name = "SKILLS")
 @Table(name = "skills")
-public class Skill {
+public class Skill implements Serializable {
 
     @Id
     @SequenceGenerator(name = "skill_id_seq", sequenceName = "skill_id_seq", allocationSize = 1)

@@ -6,18 +6,29 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import java.util.List;
 
 public class HibernateSkillDAO implements SkillDAO {
 
     private SessionFactory sessionFactory;
 
+
+    @PersistenceContext(type = PersistenceContextType.EXTENDED)
+    private EntityManager entityManager;
+
+
     @Override
     @Transactional
     public Skill find(Integer id) {
+//        return entityManager.find(Skill.class, id);
         try(Session session = sessionFactory.openSession()){
             session.joinTransaction();
-            return session.find(Skill.class, id);
+            Skill skill = session.find(Skill.class, id);
+//            skill.getDeveloper();
+            return skill;
         }
         //return sessionFactory.getCurrentSession().find(Skill.class, id);
     }

@@ -1,12 +1,16 @@
 package com.goit.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "projects")
-public class Project {
+public class Project implements Serializable{
 
     @Id
     @SequenceGenerator(name = "project_id_seq", sequenceName = "project_id_seq", allocationSize = 1)
@@ -17,19 +21,23 @@ public class Project {
     @Column(name = "name")
     private String name;
 
+    @JsonSerialize(using = utils.json.CustomLocalDateTimeSerializer.class)
     @Column(name = "dat_beg")
     private LocalDate datBeg;
 
+    @JsonSerialize(using = utils.json.CustomLocalDateTimeSerializer.class)
     @Column(name = "dat_end")
     private LocalDate datEnd;
 
     @Column(name = "cost")
     private Integer cost;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_company")
     private Company company;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_customer")
     private Customer customer;
