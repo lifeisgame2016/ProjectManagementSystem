@@ -2,8 +2,13 @@ package com.goit.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
@@ -18,9 +23,13 @@ public class Developer implements Serializable {
     private Integer id;
 
     @Column(name = "name")
+    @Size(min = 3)
     private String name;
 
     @Column(name = "age")
+
+    @Max(value = 200)
+    @Min(value = 11)
     private Integer age;
 
     @Column(name = "address")
@@ -34,6 +43,7 @@ public class Developer implements Serializable {
     private Project project;
 
     @JsonBackReference
+    @Cascade(CascadeType.REMOVE)
     @OneToMany(mappedBy = "developer")
     private List<Skill> skills;
 

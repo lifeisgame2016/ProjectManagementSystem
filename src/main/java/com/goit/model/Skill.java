@@ -4,6 +4,7 @@ package com.goit.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 
@@ -17,6 +18,8 @@ public class Skill implements Serializable {
     @Column(name = "id_skills")
     private Integer id;
 
+
+    @Size(min = 2)
     @Column(name = "name")
     private String name;
 

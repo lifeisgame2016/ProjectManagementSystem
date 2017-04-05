@@ -27,7 +27,7 @@ public final class SkillBuilder {
         return this;
     }
 
-    public SkillBuilder withDeveloperId(Developer developerId) {
+    public SkillBuilder withDeveloper(Developer developer) {
         this.developer = developer;
         return this;
     }
