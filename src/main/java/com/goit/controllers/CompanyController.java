@@ -5,8 +5,8 @@ import com.goit.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Propagation;
@@ -21,7 +21,7 @@ import java.util.List;
 @Transactional
 public class CompanyController {
     @Autowired
-    private PlatformTransactionManager txManager;
+    private HibernateTransactionManager txManager;
     @Autowired
     private CompanyService companyService;
 
