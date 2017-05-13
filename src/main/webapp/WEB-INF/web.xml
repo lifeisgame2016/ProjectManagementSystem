@@ -15,7 +15,7 @@
         </servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/mvc-application-context.xml</param-value>
+            <param-value>classpath:/mvc-application-context.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -34,8 +34,11 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/application-context.xml</param-value>
+        <param-value>classpath:/application-context.xml</param-value>
     </context-param>
 
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
 
 </web-app>
